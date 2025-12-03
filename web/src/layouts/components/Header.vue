@@ -13,6 +13,7 @@ import {ref} from 'vue'
 const activeIndex = ref('/dashboard')
 const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
+  activeIndex.value = key
 }
 </script>
 <style lang="scss" scoped>
