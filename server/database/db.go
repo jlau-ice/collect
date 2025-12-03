@@ -5,7 +5,8 @@ import (
 	"server/config"
 	"server/models"
 
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
+
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )
@@ -17,8 +18,12 @@ func InitDB() error {
 	dsn := config.AppConfig.Database.GetDSN()
 
 	var err error
-	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{
+	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
+		// GORM 日志配置
 		Logger: logger.Default.LogMode(logger.Info),
+
+		// ❗ 注意：如果您在 config 包中设置了 Schema，
+		// 这里 GORM 默认就会使用该 Schema 进行操作。
 	})
 
 	if err != nil {
@@ -38,6 +43,8 @@ func InitDB() error {
 
 // AutoMigrate 自动迁移数据库表
 func AutoMigrate() error {
+	// PgSQL 对大小写敏感，且习惯使用蛇形命名 (snake_case)。
+	// GORM 默认会处理这些，但请确保你的 models/ 结构体命名规范。
 	err := DB.AutoMigrate(
 		&models.Department{},
 		&models.User{},
@@ -61,4 +68,3 @@ func CloseDB() error {
 	}
 	return sqlDB.Close()
 }
-

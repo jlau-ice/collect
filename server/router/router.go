@@ -12,7 +12,7 @@ func SetupRoutes(r *gin.Engine) {
 		// 健康检查
 		api.GET("/health", func(c *gin.Context) {
 			c.JSON(200, gin.H{
-				"status": "ok",
+				"status":  "ok",
 				"message": "服务运行正常",
 			})
 		})
@@ -77,4 +77,3 @@ func SetupRoutes(r *gin.Engine) {
 		}
 	}
 }
-
