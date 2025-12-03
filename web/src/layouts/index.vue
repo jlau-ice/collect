@@ -4,7 +4,7 @@
       <Header/>
     </el-header>
     <el-container class="h-[calc(100vh-60px)] ">
-      <el-aside width="200px" class="border-r border-r-[#e0e0e0]">
+      <el-aside width="300px" class="border-r border-r-[#e0e0e0]">
         <Sidebar/>
       </el-aside>
       <el-main>
