@@ -1,4 +1,4 @@
-module server
+module github.com/jlau-ice/collect
 
 go 1.25.4
 

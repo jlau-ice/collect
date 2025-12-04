@@ -14,7 +14,7 @@ type Department struct {
 	DeletedAt gorm.DeletedAt `gorm:"index" json:"-"`
 
 	Name        string `gorm:"type:varchar(100);not null;uniqueIndex" json:"name"` // 部门名称
-	Description string `gorm:"type:varchar(500)" json:"description"`                // 部门描述
+	Description string `gorm:"type:varchar(500)" json:"description"`               // 部门描述
 
 	// 关联关系
 	Users []User `gorm:"foreignKey:DepartmentID" json:"users,omitempty"`
@@ -24,4 +24,3 @@ type Department struct {
 func (Department) TableName() string {
 	return "departments"
 }
-

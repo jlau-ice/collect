@@ -2,9 +2,9 @@ package database
 
 import (
 	"log"
-	"server/config"
-	"server/models"
 
+	"github.com/jlau-ice/collect/internal/config"
+	"github.com/jlau-ice/collect/internal/models"
 	"gorm.io/driver/postgres"
 
 	"gorm.io/gorm"

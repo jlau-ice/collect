@@ -2,11 +2,11 @@ package main
 
 import (
 	"log"
-	"server/config"
-	"server/database"
-	"server/router"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jlau-ice/collect/internal/config"
+	"github.com/jlau-ice/collect/internal/database"
+	"github.com/jlau-ice/collect/internal/router"
 )
 
 func main() {
@@ -37,4 +37,3 @@ func main() {
 		log.Fatalf("服务器启动失败: %v", err)
 	}
 }
-

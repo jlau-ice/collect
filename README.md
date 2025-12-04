@@ -7,30 +7,7 @@
 ## 技术栈
 
 - **前端**: Vue 3 + TypeScript + Vite + Element Plus + Pinia + Vue Router
-- **后端**: Go + Gin + GORM + MySQL
-
-## 项目结构
-
-```
-collect-tools/
-├── server/          # Go后端服务
-│   ├── config/      # 配置管理
-│   ├── database/    # 数据库初始化
-│   ├── models/      # 数据模型
-│   ├── router/      # 路由定义
-│   └── main.go      # 入口文件
-└── web/             # Vue前端应用
-    ├── src/
-    │   ├── components/  # 组件
-    │   ├── layouts/     # 布局
-    │   ├── router/      # 路由
-    │   ├── store/       # Pinia状态管理
-    │   ├── utils/       # 工具函数
-    │   └── views/       # 页面视图
-    └── ...
-```
-
-## 快速开始
+- **后端**: Go + Gin + GORM + PosgreSQL
 
 ### 前置要求
 
@@ -38,48 +15,6 @@ collect-tools/
 - Node.js 18+
 - pnpm
 - MySQL 5.7+
-
-### 后端启动
-
-1. 进入server目录：
-```bash
-cd server
-```
-
-2. 安装依赖：
-```bash
-go mod download
-```
-
-3. 配置数据库：
-   - 创建MySQL数据库
-   - 复制 `.env.example` 为 `.env` 并修改配置
-
-4. 启动服务：
-```bash
-go run main.go
-```
-
-服务将在 `http://localhost:8080` 启动
-
-### 前端启动
-
-1. 进入web目录：
-```bash
-cd web
-```
-
-2. 安装依赖：
-```bash
-pnpm install
-```
-
-3. 启动开发服务器：
-```bash
-pnpm dev
-```
-
-前端将在 `http://localhost:5173` 启动
 
 ## 功能模块
 
