@@ -3,13 +3,14 @@ package container
 import (
 	"fmt"
 	"log"
-	"os"
 	"time"
 
-	"github.com/gin-gonic/gin"
 	"github.com/jlau-ice/collect/internal/config"
+	"github.com/jlau-ice/collect/internal/handler"
 	"github.com/jlau-ice/collect/internal/models"
+	"github.com/jlau-ice/collect/internal/repository"
 	"github.com/jlau-ice/collect/internal/router"
+	"github.com/jlau-ice/collect/internal/service"
 	"go.uber.org/dig"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -22,8 +23,13 @@ func BuildContainer(container *dig.Container) *dig.Container {
 	must(container.Provide(config.LoadConfig))
 	// 注册数据库初始化器
 	must(container.Provide(initDatabase))
-	// 注册 Gin 引擎创建器（包含路由设置）
-	must(container.Provide(initGinEngine))
+	// 注册仓储与服务
+	must(container.Provide(repository.NewDepartmentRepository))
+	must(container.Provide(service.NewDepartmentService))
+	must(container.Provide(handler.NewDepartmentHandler))
+
+	// Router configuration
+	must(container.Provide(router.NewRouter))
 	return container
 }
 
@@ -68,19 +74,4 @@ func initDatabase(cfg *config.Config) (*gorm.DB, error) {
 	sqlDB.SetMaxIdleConns(10)
 	sqlDB.SetConnMaxLifetime(time.Duration(10) * time.Minute)
 	return db, nil
-}
-
-// initGinEngine 初始化 Gin 引擎并设置路由
-// 返回：*gin.Engine
-func initGinEngine() (*gin.Engine, error) {
-	// 设置Gin模式
-	if os.Getenv("GIN_MODE") == "release" {
-		gin.SetMode(gin.ReleaseMode)
-	} else {
-		gin.SetMode(gin.DebugMode)
-	}
-	engine := gin.Default()
-	// 设置路由
-	router.SetupRoutes(engine)
-	return engine, nil
 }

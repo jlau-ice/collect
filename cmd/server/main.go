@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jlau-ice/collect/internal/config"
@@ -11,6 +12,12 @@ import (
 )
 
 func main() {
+
+	if os.Getenv("GIN_MODE") == "release" {
+		gin.SetMode(gin.ReleaseMode)
+	} else {
+		gin.SetMode(gin.DebugMode)
+	}
 	// 构建依赖注入容器
 	c := container.BuildContainer(runtime.GetContainer())
 	// 通过依赖注入获取所有需要的服务
